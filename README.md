@@ -82,12 +82,12 @@ Resposta:
 
  - [ ] Criar frontend simples que consome a API
 
-##💡 Esse projeto faz parte de um ecossistema maior:
+## 💡 Esse projeto faz parte de um ecossistema maior:
 
 - [Fake News ML Model](https://github.com/malvesbruno/fakeNews_ml)
  → treinamento do modelo
 
-- Fake News API
+- [Fake News API](https://github.com/malvesbruno/fakeNews_API)
  → esta API
 
 - Fake News Frontend
