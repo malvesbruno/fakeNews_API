@@ -1,25 +1,35 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
 
-app = FastAPI() # cria a API
-model = joblib.load('models/fake_news_model.pkl') # Carrega o modelo de ML
-vectorizer = joblib.load('models/tfidf_vectorizer.pkl') # carrega o vetorizador
+app = FastAPI()
 
-#cria um modelo base para como os dados devem vir para a api
-class News(BaseModel): 
-    text:str
+# Adiciona CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # coloca o domínio do seu front se quiser restringir
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-# Metodo post
-# enviamos dados para a api
+# Carrega modelo e vetorizador
+model = joblib.load('models/fake_news_model.pkl')
+vectorizer = joblib.load('models/tfidf_vectorizer.pkl')
+
+# Define estrutura dos dados
+class News(BaseModel):
+    text: str
+
+# Método POST
 @app.post('/predict')
 def predict(news: News):
     textVectorized = vectorizer.transform([news.text])
     pred = model.predict(textVectorized)[0]
     return {"prediction": int(pred)}
 
-# Metodo get
-# Passmos dados através da url querys
+# Método GET
 @app.get('/predict')
 def predict_get(text: str):
     textVectorized = vectorizer.transform([text])
