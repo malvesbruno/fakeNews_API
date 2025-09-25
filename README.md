@@ -90,5 +90,5 @@ Resposta:
 - [Fake News API](https://github.com/malvesbruno/fakeNews_API)
  → esta API
 
-- Fake News Frontend
+- [Fake News Frontend](https://github.com/malvesbruno/fakeNews_FrontEnd)
  → interface do usuário
